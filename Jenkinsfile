@@ -11,5 +11,10 @@ pipeline {
         sh 'mvn -Dmaven.test.failure.ignore=true install'
       }
     }
+    stage('Deploy WAR') {
+      steps {
+        sh 'sudo cp target/myapp.war /usr/share/tomcat/webapps/'
+      }
+    }
   }
 }

@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h3>Hello!!!</h3>
-<h2>Hello######</h2>
-<h1>Hello!!!!</h1>
-<h3>Hello!!!</h3>
-<h2>Hello######</h2>
-<h1>Hello!!!!</h1>
+<h1>Hello World!</h1>
+<h2>This is a Blue Ocean Pipeline Project</h2>
 </body>

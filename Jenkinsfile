@@ -16,10 +16,5 @@ pipeline {
         sh 'sudo cp target/myapp.war /usr/share/tomcat/webapps/'
       }
     }
-    stage('Deploy war2') {
-      steps {
-        sh 'sshpass -p \'admin@123\' scp target/myapp.war root@ec2-13-127-171-255.ap-south-1.compute.amazonaws.com:/usr/share/tomcat/webapps/'
-      }
-    }
   }
 }

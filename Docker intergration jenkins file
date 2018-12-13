@@ -1,0 +1,31 @@
+node {
+    stage('checkout from github'){
+    git 'https://github.com/vinaygit1/neweclipse.git'
+    }
+    
+    stage('maven-compilation'){
+    def mvnHome = tool name: 'Maven-3.6', type: 'maven'
+    sh "${mvnHome}/bin/mvn package"
+    }
+    stage('building a docker image'){
+     sh 'docker build -t vinaykumar12/myapp .'
+
+    }
+    stage('pushing the docker image to docker hub'){
+        withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhubpwd')]) {
+            sh "docker login -u vinaykumar12 -p ${dockerhubpwd}"
+     
+    }
+     sh 'docker push vinaykumar12/myapp'
+    }
+    stage('Run the docker in deployement server'){
+        def dockerRun = 'docker run -p 8080:8080 -d --name my-app vinaykumar12/myapp'
+        sshagent(['Deployementserver']) {
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.95 ${dockerRun}"
+    }
+
+    }
+        
+    }
+        
+ 
